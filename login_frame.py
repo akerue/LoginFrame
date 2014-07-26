@@ -87,7 +87,7 @@ class LoginFrame(Frame):
 
         input_frame.grid(padx=5, pady=5)
 
-def call_frame(login_function):
-    root = Tk(screenName="Input Login Info")
-    login_frame = LoginFrame(master=root, func=login_function)
+def call_frame(login_function, screen_name="Input Login Info", title="Login Window", message=None, first_label=None, second_label=None, visible=False):
+    root = Tk(screenName=screen_name)
+    login_frame = LoginFrame(master=root, func=login_function, title="Login Window", message=None, first_label=None, second_label=None, visible=False)
     login_frame.mainloop()
