@@ -87,7 +87,28 @@ class LoginFrame(Frame):
 
         input_frame.grid(padx=5, pady=5)
 
-def call_frame(login_function, screen_name="Input Login Info", title="Login Window", message=None, first_label=None, second_label=None, visible=False):
-    root = Tk(screenName=screen_name)
-    login_frame = LoginFrame(master=root, func=login_function, title="Login Window", message=None, first_label=None, second_label=None, visible=False)
-    login_frame.mainloop()
+def frame_wrapper(login_function):
+
+    def force_to_search(dic, key, default):
+        # 辞書からキーを取り出してもし定義されていなければデフォルト値を返す
+        try:
+            return dic[key]
+        except KeyError:
+            return default
+
+    def call_frame(**options):
+
+        screen_name = force_to_search(options, "screen_name", "Input Login Info")
+        title = force_to_search(options, "title", "Login Window")
+        message = force_to_search(options, "message", None)
+        first_label = force_to_search(options, "first_label", None)
+        second_label = force_to_search(options, "second_label", None)
+        visible = force_to_search(options, "visible", False)
+
+        root = Tk(screenName=screen_name)
+        login_frame = LoginFrame(master=root, func=login_function, title=title,
+                message=message, first_label=first_label,
+                second_label=second_label, visible=visible)
+        login_frame.mainloop()
+    return call_frame
+
