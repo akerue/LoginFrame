@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division, absolute_import, print_function, unicode_literals
 
-from login_frame import *
+from LoginFrame.login_frame import *
 
 @frame_wrapper
 def sample_function(username, password):
