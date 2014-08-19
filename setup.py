@@ -9,7 +9,6 @@ setup(
         author_email="hsmgn8118akerue@gmail.com",
         url="https://github.com/akerue/LoginFrame",
         packages=find_packages(),
-        py_module=["login_frame"],
         classifiers=[
             "Development Status :: 4 - Beta",
             "License :: OSI Approved :: MIT License",
