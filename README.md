@@ -25,3 +25,9 @@ frame_wrapperデコレータはいくつかのオプションを引数に指定�
 - visible: Falseにすると二つ目の入力文字が"*"に変更される．デフォルトはFalse
 
 sample.py内で定義されたsample_function2のように辞書式でオプションを追加可能
+
+### インストール方法
+```
+$ sudo python setup.py install
+```
+
