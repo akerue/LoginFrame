@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division, absolute_import, print_function, unicode_literals
+import types
 
 try:
     from Tkinter import * # pylint: disable=W0614
@@ -90,21 +91,22 @@ class LoginFrame(Frame):
 def frame_wrapper(func=None, screen_name="Input Login Info", title="Login Window",
         message=None, first_label=None, second_label=None, visible=False):
 
-    if func is None:
-        def _inner_wrapper(login_function):
-            def _call_frame():
-
-                root = Tk(screenName=screen_name)
-                login_frame = LoginFrame(master=root, func=login_function, title=title,
-                        message=message, first_label=first_label,
-                        second_label=second_label, visible=visible)
-                login_frame.mainloop()
-            return _call_frame
-    else:
+    if isinstance(func, types.FunctionType):
+        # call decorator without args
         def _inner_wrapper():
             root = Tk(screenName=screen_name)
             login_frame = LoginFrame(master=root, func=func, title=title,
                     message=message, first_label=first_label,
                     second_label=second_label, visible=visible)
             login_frame.mainloop()
+    else:
+        # call decorator with args
+        def _inner_wrapper(login_function):
+            def _call_frame():
+                root = Tk(screenName=screen_name)
+                login_frame = LoginFrame(master=root, func=login_function, title=title,
+                        message=message, first_label=first_label,
+                        second_label=second_label, visible=visible)
+                login_frame.mainloop()
+            return _call_frame
     return _inner_wrapper
