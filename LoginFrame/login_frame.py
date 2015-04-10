@@ -107,6 +107,7 @@ def frame_wrapper(func=None, screen_name="Input Login Info",
                                      message=message, first_label=first_label,
                                      second_label=second_label, visible=visible)
             login_frame.mainloop()
+            root.destroy()
     else:
         # call decorator with args
         def _inner_wrapper(login_function):
@@ -119,5 +120,6 @@ def frame_wrapper(func=None, screen_name="Input Login Info",
                                          second_label=second_label,
                                          visible=visible)
                 login_frame.mainloop()
+                root.destroy()
             return _call_frame
     return _inner_wrapper
