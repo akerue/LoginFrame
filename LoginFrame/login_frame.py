@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division, absolute_import, print_function, unicode_literals
 import types
+import functools
 
 try:
     from Tkinter import * # pylint: disable=W0614
@@ -93,6 +94,7 @@ def frame_wrapper(func=None, screen_name="Input Login Info", title="Login Window
 
     if isinstance(func, types.FunctionType):
         # call decorator without args
+        @functools.wraps(func)
         def _inner_wrapper():
             root = Tk(screenName=screen_name)
             login_frame = LoginFrame(master=root, func=func, title=title,
@@ -102,6 +104,7 @@ def frame_wrapper(func=None, screen_name="Input Login Info", title="Login Window
     else:
         # call decorator with args
         def _inner_wrapper(login_function):
+            @functools.wraps(login_function)
             def _call_frame():
                 root = Tk(screenName=screen_name)
                 login_frame = LoginFrame(master=root, func=login_function, title=title,
