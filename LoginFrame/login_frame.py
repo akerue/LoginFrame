@@ -4,10 +4,11 @@ import types
 import functools
 
 try:
-    from Tkinter import * # pylint: disable=W0614
-    from tkMessageBox import * # pylint: disable=W0614
+    from Tkinter import *  # pylint: disable=W0614
+    from tkMessageBox import *  # pylint: disable=W0614
 except ImportError:
     pass
+
 
 class LoginFrame(Frame):
     def callback(self, event):
@@ -28,7 +29,9 @@ class LoginFrame(Frame):
         self.message.set("")
         self.quit()
 
-    def __init__(self, master=None, func=None, title="Login Window", message=None, first_label=None, second_label=None, visible=False):
+    def __init__(self, master=None, func=None, title="Login Window",
+                 message=None, first_label=None, second_label=None,
+                 visible=False):
         Frame.__init__(self, master)
         self.pack()
 
@@ -79,7 +82,8 @@ class LoginFrame(Frame):
         message_label = Label(input_frame, textvariable=self.message, bg="gray")
         message_label.grid(row=3, column=0, padx=3, pady=5)
 
-        input_btn = Button(input_frame, text='ログイン', command=self.throw_login_info)
+        input_btn = Button(input_frame, text='ログイン',
+                           command=self.throw_login_info)
         input_btn.grid(row=3, column=2, padx=5, pady=5)
         input_btn.bind('<Return>', self.callback)
 
@@ -89,8 +93,10 @@ class LoginFrame(Frame):
 
         input_frame.grid(padx=5, pady=5)
 
-def frame_wrapper(func=None, screen_name="Input Login Info", title="Login Window",
-        message=None, first_label=None, second_label=None, visible=False):
+
+def frame_wrapper(func=None, screen_name="Input Login Info",
+                  title="Login Window", message=None, first_label=None,
+                  second_label=None, visible=False):
 
     if isinstance(func, types.FunctionType):
         # call decorator without args
@@ -98,8 +104,8 @@ def frame_wrapper(func=None, screen_name="Input Login Info", title="Login Window
         def _inner_wrapper():
             root = Tk(screenName=screen_name)
             login_frame = LoginFrame(master=root, func=func, title=title,
-                    message=message, first_label=first_label,
-                    second_label=second_label, visible=visible)
+                                     message=message, first_label=first_label,
+                                     second_label=second_label, visible=visible)
             login_frame.mainloop()
     else:
         # call decorator with args
@@ -107,9 +113,11 @@ def frame_wrapper(func=None, screen_name="Input Login Info", title="Login Window
             @functools.wraps(login_function)
             def _call_frame():
                 root = Tk(screenName=screen_name)
-                login_frame = LoginFrame(master=root, func=login_function, title=title,
-                        message=message, first_label=first_label,
-                        second_label=second_label, visible=visible)
+                login_frame = LoginFrame(master=root, func=login_function,
+                                         title=title, message=message,
+                                         first_label=first_label,
+                                         second_label=second_label,
+                                         visible=visible)
                 login_frame.mainloop()
             return _call_frame
     return _inner_wrapper
