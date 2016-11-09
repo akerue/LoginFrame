@@ -22,7 +22,7 @@ class LoginFrame(Frame):
         self.message.set("実行中...")
         self.update()
         try:
-            self.func(self.username.get(), self.password.get())
+            self.func(self.username.get(), self.password.get(), self.args)
         except BaseException, e:
             self.quit()
             raise e
@@ -31,9 +31,12 @@ class LoginFrame(Frame):
 
     def __init__(self, master=None, func=None, title="Login Window",
                  message=None, first_label=None, second_label=None,
-                 visible=False):
+                 visible=False, args=None):
         Frame.__init__(self, master)
         self.pack()
+
+        if args is not None:
+            self.args = args
 
         # ログイン情報を渡す関数を登録
         self.func = func
@@ -101,24 +104,25 @@ def frame_wrapper(func=None, screen_name="Input Login Info",
     if isinstance(func, types.FunctionType):
         # call decorator without args
         @functools.wraps(func)
-        def _inner_wrapper():
+        def _inner_wrapper(*args):
             root = Tk(screenName=screen_name)
             login_frame = LoginFrame(master=root, func=func, title=title,
                                      message=message, first_label=first_label,
-                                     second_label=second_label, visible=visible)
+                                     second_label=second_label, visible=visible,
+                                     args=args)
             login_frame.mainloop()
             root.destroy()
     else:
         # call decorator with args
         def _inner_wrapper(login_function):
             @functools.wraps(login_function)
-            def _call_frame():
+            def _call_frame(*args):
                 root = Tk(screenName=screen_name)
                 login_frame = LoginFrame(master=root, func=login_function,
                                          title=title, message=message,
                                          first_label=first_label,
                                          second_label=second_label,
-                                         visible=visible)
+                                         visible=visible, args=args)
                 login_frame.mainloop()
                 root.destroy()
             return _call_frame

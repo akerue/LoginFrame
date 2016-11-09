@@ -5,24 +5,26 @@ from LoginFrame.login_frame import *
 
 
 @frame_wrapper
-def sample_function(username, password):
+def sample_function(username, password, args):
     # Do something to log in
     print("Login Name: {}".format(username))
     print("Password: {}".format(password))
+    print("args: {}".format(args))
     return
 
 
 @frame_wrapper(title="Other frame window", message="他のメッセージも指定可能")
-def sample_function2(username, password):
+def sample_function2(username, password, args):
     # Do something to log in
     print("Login Name: {}".format(username))
     print("Password: {}".format(password))
+    print("args: {}".format(args))
     return
 
 
 def main():
-    sample_function()
-    sample_function2()
+    sample_function("args")
+    sample_function2("args")
 
 if __name__ == "__main__":
     main()
