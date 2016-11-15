@@ -20,7 +20,6 @@ class LoginFrame(Frame):
 
     def throw_login_info(self):
         self.message.set("実行中...")
-        self.update()
         try:
             if self.args:
                 self.result = self.func(self.username.get(), self.password.get(), self.args)
@@ -29,6 +28,7 @@ class LoginFrame(Frame):
         except BaseException, e:
             self.quit()
             raise e
+        self.update()
         self.message.set("")
         self.quit()
 
