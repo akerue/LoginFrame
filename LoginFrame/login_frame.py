@@ -22,7 +22,7 @@ class LoginFrame(Frame):
         self.message.set("実行中...")
         self.update()
         try:
-            self.func(self.username.get(), self.password.get(), self.args)
+            self.result = self.func(self.username.get(), self.password.get(), self.args)
         except BaseException, e:
             self.quit()
             raise e
@@ -112,6 +112,7 @@ def frame_wrapper(func=None, screen_name="Input Login Info",
                                      args=args)
             login_frame.mainloop()
             root.destroy()
+            return login_frame.result
     else:
         # call decorator with args
         def _inner_wrapper(login_function):
@@ -125,5 +126,6 @@ def frame_wrapper(func=None, screen_name="Input Login Info",
                                          visible=visible, args=args)
                 login_frame.mainloop()
                 root.destroy()
+                return login_frame.result
             return _call_frame
     return _inner_wrapper
