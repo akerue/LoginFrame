@@ -5,11 +5,10 @@ from LoginFrame.login_frame import *
 
 
 @frame_wrapper
-def sample_function(username, password, args):
+def sample_function(username, password):
     # Do something to log in
     print("Login Name: {}".format(username))
     print("Password: {}".format(password))
-    print("args: {}".format(args))
     return username, password
 
 
@@ -23,7 +22,7 @@ def sample_function2(username, password, args):
 
 
 def main():
-    print(sample_function("args", "args2"))
+    print(sample_function())
     print(sample_function2("args", "args2"))
 
 if __name__ == "__main__":

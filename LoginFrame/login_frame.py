@@ -22,7 +22,7 @@ class LoginFrame(Frame):
         self.message.set("実行中...")
         self.update()
         try:
-            if self.args is not None:
+            if self.args:
                 self.result = self.func(self.username.get(), self.password.get(), self.args)
             else:
                 self.result = self.func(self.username.get(), self.password.get())
