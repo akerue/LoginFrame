@@ -23,8 +23,8 @@ def sample_function2(username, password, args):
 
 
 def main():
-    print(sample_function())
-    print(sample_function2("args"))
+    print(sample_function("args", "args2"))
+    print(sample_function2("args", "args2"))
 
 if __name__ == "__main__":
     main()
