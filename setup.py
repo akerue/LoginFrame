@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
         name="LoginFrame",
-        version="0.4.3",
+        version="0.4.4",
         author="akerue",
         author_email="hsmgn8118akerue@gmail.com",
         url="https://github.com/akerue/LoginFrame",

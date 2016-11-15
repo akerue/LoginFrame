@@ -27,6 +27,7 @@ class LoginFrame(Frame):
                 self.result = self.func(self.username.get(), self.password.get())
         except BaseException, e:
             self.quit()
+            self.result = None
             raise e
         self.update()
         self.message.set("")
